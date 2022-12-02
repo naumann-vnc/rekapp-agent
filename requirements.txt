@@ -1,0 +1,7 @@
+pyautogui
+datetime
+pywin32
+mongoengine
+pynput
+configparser
+requests
