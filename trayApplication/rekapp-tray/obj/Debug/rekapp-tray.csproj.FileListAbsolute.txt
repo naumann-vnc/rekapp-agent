@@ -1,0 +1,10 @@
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\rekapp-tray.exe.config
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\rekapp-tray.exe
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\rekapp-tray.pdb
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\obj\Debug\rekapp-tray.csproj.AssemblyReference.cache
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\obj\Debug\rekapp_tray.Properties.Resources.resources
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\obj\Debug\rekapp-tray.csproj.GenerateResource.cache
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\obj\Debug\rekapp-tray.csproj.CoreCompileInputs.cache
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\obj\Debug\rekapp-tray.exe
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\obj\Debug\rekapp-tray.pdb
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\obj\Debug\rekapp_tray.App.resources
