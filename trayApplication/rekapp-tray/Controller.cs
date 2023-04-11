@@ -25,11 +25,11 @@ namespace rekapp_tray
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     // Write data to the file
-                    writer.WriteLine("ReceiverIP=${" + json.ReceiverIP + "}");
-                    writer.WriteLine("ReceiverPort=${" + json.ReceiverPort + "}");
-                    writer.WriteLine("PackageCaptureTime=${" + json.PackageCaptureTime + "}");
-                    writer.WriteLine("PackageCaptureInterval=${" + json.PackageCaptureInterval + "}");
-                    writer.WriteLine("InactivityThreshold=${" + json.InactivityThreshold + "}");
+                    writer.WriteLine($"ReceiverIP={json.ReceiverIP}");
+                    writer.WriteLine($"ReceiverPort={json.ReceiverPort}");
+                    writer.WriteLine($"PackageCaptureTime={json.PackageCaptureTime}");
+                    writer.WriteLine($"PackageCaptureInterval={json.PackageCaptureInterval}");
+                    writer.WriteLine($"InactivityThreshold={json.InactivityThreshold}");
                     // Close the StreamWriter
                     writer.Close();
                 }
@@ -41,7 +41,8 @@ namespace rekapp_tray
                 Console.WriteLine("Error creating or writing to file: " + ex.Message);
             }
         }
-        public void ListenRequest()
+
+        public async void ListenRequest()
         {
             int port = 12345; // Port number to listen on
 
@@ -57,7 +58,7 @@ namespace rekapp_tray
                 while (true)
                 {
                     // Accept an incoming connection
-                    TcpClient client = listener.AcceptTcpClient();
+                    TcpClient client = await listener.AcceptTcpClientAsync();
                     Console.WriteLine("Client connected.");
 
                     // Get the network stream for reading and writing data
@@ -65,15 +66,18 @@ namespace rekapp_tray
 
                     // Read data from the client
                     byte[] buffer = new byte[1024];
-                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                    int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
                     string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     Console.WriteLine($"Received data: {receivedData}");
 
+                    // Parse the received data as an HTTP request
+                    HttpRequest httpRequest = HttpRequest.Parse(receivedData);
+
                     // Check if the request is a POST request
-                    if (receivedData.StartsWith("POST"))
+                    if (httpRequest.Method == "POST")
                     {
                         // Extract the data from the POST request
-                        string postData = receivedData.Substring(receivedData.IndexOf("\r\n\r\n") + 4);
+                        string postData = httpRequest.Body;
 
                         // Process the POST data
                         // ... (do something with postData)
@@ -81,7 +85,7 @@ namespace rekapp_tray
                         // Send a response back to the client
                         string responseData = "Hello from the server!";
                         byte[] responseBuffer = Encoding.UTF8.GetBytes(responseData);
-                        stream.Write(responseBuffer, 0, responseBuffer.Length);
+                        await stream.WriteAsync(responseBuffer, 0, responseBuffer.Length);
                         Console.WriteLine($"Sent data: {responseData}");
                     }
 
@@ -96,5 +100,31 @@ namespace rekapp_tray
                 listener.Stop();
             }
         }
+
+        // Simple HTTP request class for parsing HTTP requests
+        public class HttpRequest
+        {
+            public string Method { get; set; }
+            public string Path { get; set; }
+            public string Body { get; set; }
+
+            public static HttpRequest Parse(string httpRequest)
+            {
+                HttpRequest request = new HttpRequest();
+                string[] lines = httpRequest.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] requestLine = lines[0].Split(' ');
+                request.Method = requestLine[0];
+                request.Path = requestLine[1];
+
+                // Extract the body from the request, if present
+                int byteIndex = Array.IndexOf(lines, "");
+                if (byteIndex != -1 && byteIndex + 1 < lines.Length)
+                {
+                    request.Body = lines[byteIndex + 1];
+                }
+                return request;
+            }
+        }
+
     }
 }

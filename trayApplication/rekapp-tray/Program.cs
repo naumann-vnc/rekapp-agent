@@ -15,10 +15,9 @@ namespace rekapp_tray
         static void Main()
         {
 
-            Controller control = new Controller();
-            JsonModel json = new JsonModel();
-            json.InactivityThreshold = "18.569";
-            control.CreateFile(json);
+            //JsonModel json = new JsonModel();
+            //json.InactivityThreshold = "18.569";
+            //control.CreateFile(json);
 
             var user_email = ConfigurationManager.AppSettings["email"];
             Console.WriteLine($"User {user_email}");
@@ -46,7 +45,12 @@ namespace rekapp_tray
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new App());
-            control.ListenRequest();
+
+            // Create an instance of the Controller class
+            Controller controller = new Controller();
+
+            // Call the ListenRequest method to start listening for incoming requests
+            controller.ListenRequest();
 
 
         }
