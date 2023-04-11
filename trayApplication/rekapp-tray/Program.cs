@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Microsoft.Win32.TaskScheduler;
+using System;
 using System.Configuration;
-using Microsoft.Win32.TaskScheduler;
+using System.Windows.Forms;
+
 
 namespace rekapp_tray
 {
@@ -16,9 +14,16 @@ namespace rekapp_tray
         [STAThread]
         static void Main()
         {
+
+            Controller control = new Controller();
+            JsonModel json = new JsonModel();
+            json.InactivityThreshold = "18.569";
+            control.CreateFile(json);
+
             var user_email = ConfigurationManager.AppSettings["email"];
-            var user_ip = ConfigurationManager.AppSettings["ip"];
-            string taskName = "Open Notepa++";
+            Console.WriteLine($"User {user_email}");
+
+            string taskName = "Open Notepad++";
             TaskDefinition td = TaskService.Instance.NewTask();
             td.RegistrationInfo.Author = "Rekapp";
             td.Actions.Add(new ExecAction(@"C:\Program Files\Notepad++\notepad++.exe"));
@@ -27,7 +32,7 @@ namespace rekapp_tray
             //folder.RegisterTaskDefinition(taskName, td).Run();
 
             TaskService ts = TaskService.Instance;
-            var folder = TaskService.Instance.RootFolder.CreateFolder("Rekapp");
+            //var folder = TaskService.Instance.RootFolder.CreateFolder("Rekapp");
             var tasks = ts.GetFolder("Rekapp").Tasks;
 
             foreach (var task in tasks)
@@ -41,6 +46,9 @@ namespace rekapp_tray
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new App());
+            control.ListenRequest();
+
+
         }
     }
 }
