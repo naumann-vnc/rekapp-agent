@@ -56,3 +56,5 @@ C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\pl\Microso
 C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\ru\Microsoft.Win32.TaskScheduler.resources.dll
 C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\zh-CN\Microsoft.Win32.TaskScheduler.resources.dll
 C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\zh-Hant\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Raque\git\rekapp-agent\trayApplication\rekapp-tray\bin\Debug\Newtonsoft.Json.xml

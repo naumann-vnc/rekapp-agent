@@ -5,10 +5,10 @@ namespace rekapp_tray
 {
     public class Controller
     {
-        public void CreateFile(JsonModel json)
+        public void CreateFile(String JsonText)
         {
             // Specify the file path and name
-            string filePath = @"C:\Users\fs2118\example.txt";
+            string filePath = @"C:\Users\Raque\Documents\rekapp-config.txt";
 
             try
             {
@@ -22,11 +22,7 @@ namespace rekapp_tray
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     // Write data to the file
-                    writer.WriteLine($"ReceiverIP={json.ReceiverIP}");
-                    writer.WriteLine($"ReceiverPort={json.ReceiverPort}");
-                    writer.WriteLine($"PackageCaptureTime={json.PackageCaptureTime}");
-                    writer.WriteLine($"PackageCaptureInterval={json.PackageCaptureInterval}");
-                    writer.WriteLine($"InactivityThreshold={json.InactivityThreshold}");
+                    writer.Write(JsonText);
                     // Close the StreamWriter
                     writer.Close();
                 }

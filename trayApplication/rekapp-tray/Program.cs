@@ -1,10 +1,10 @@
 ﻿using Microsoft.Win32.TaskScheduler;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
-
 
 
 namespace rekapp_tray
@@ -19,12 +19,11 @@ namespace rekapp_tray
         static void Main()
         {
 
-            string url = "http://localhost:8080/"; // URL where the server will listen for incoming requests
+            string url = "http://26.141.179.224:8080/"; // URL where the server will listen for incoming requests
             HttpListener listener = new HttpListener();
             listener.Prefixes.Add(url);
             listener.Start();
             Console.WriteLine($"Server listening on {url}");
-
 
             // Start a separate thread to handle incoming requests
             Thread thread = new Thread(() =>
@@ -41,11 +40,14 @@ namespace rekapp_tray
                         requestText = requestBody;
                         Console.WriteLine($"Received request with body: {requestBody}");
                         // Process the request data as needed
-                    }
 
+
+                    }
+                    Controller controler = new Controller();
                     // Send a response back to the client
+                    controler.CreateFile(requestText);
                     string responseString = $"Hello from C# server! {requestText} ";
-                    TaskSchedulerConf(requestText);
+                    //TaskSchedulerConf(requestText);
                     byte[] responseBytes = System.Text.Encoding.UTF8.GetBytes(responseString);
                     context.Response.ContentLength64 = responseBytes.Length;
                     context.Response.OutputStream.Write(responseBytes, 0, responseBytes.Length);
@@ -53,8 +55,6 @@ namespace rekapp_tray
                 }
             });
             thread.Start();
-
-
 
             // Run the WinForms application
             Application.EnableVisualStyles();
@@ -70,21 +70,6 @@ namespace rekapp_tray
             td.Actions.Add(new ExecAction(@"C:\Program Files\Notepad++\notepad++.exe"));
 
             TaskService.Instance.RootFolder.RegisterTaskDefinition(taskName, td).Run();
-
-            //folder.RegisterTaskDefinition(taskName, td).Run();
-
-            //TaskService ts = TaskService.Instance;
-            //var folder = TaskService.Instance.RootFolder.CreateFolder("Rekapp");
-            //var tasks = ts.GetFolder("Rekapp").Tasks;
-
-            //foreach (var task in tasks)
-            //{
-            //    if (task.Name == taskName)
-            //    {
-            //        task.Run();
-            //    }
-            //}
-
         }
 
         public static void Form_FormClosing(object sender, FormClosingEventArgs e)
