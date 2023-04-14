@@ -37,15 +37,9 @@ namespace rekapp_tray
                 notifyIcon1.Visible = false;
             }
         }
-
-        private void Btn_min_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
         private void Btn_close_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
