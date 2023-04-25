@@ -64,7 +64,7 @@ namespace rekapp_tray
             // pictureBox2
             // 
             this.pictureBox2.Image = global::rekapp_tray.Properties.Resources.output_onlinegiftools;
-            this.pictureBox2.Location = new System.Drawing.Point(174, 156);
+            this.pictureBox2.Location = new System.Drawing.Point(174, 192);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(154, 146);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -74,9 +74,9 @@ namespace rekapp_tray
             // pictureBox1
             // 
             this.pictureBox1.Image = global::rekapp_tray.Properties.Resources.Rekapp_logo_removebg_preview__1_;
-            this.pictureBox1.Location = new System.Drawing.Point(147, 67);
+            this.pictureBox1.Location = new System.Drawing.Point(57, 35);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(213, 83);
+            this.pictureBox1.Size = new System.Drawing.Size(389, 173);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
@@ -86,9 +86,9 @@ namespace rekapp_tray
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 350);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btn_close);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "App";

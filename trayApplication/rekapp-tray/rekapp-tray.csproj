@@ -128,5 +128,8 @@
   <ItemGroup>
     <None Include="Resources\output-onlinegiftools.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\rekapp-png-up.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
