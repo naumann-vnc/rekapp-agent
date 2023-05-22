@@ -19,7 +19,7 @@ namespace rekapp_tray
         static void Main()
         {
 
-            string url = "http://26.141.179.224:8080/"; // URL where the server will listen for incoming requests
+            string url = "http://26.147.255.137:8080/"; // URL where the server will listen for incoming requests
             HttpListener listener = new HttpListener();
             listener.Prefixes.Add(url);
             listener.Start();
