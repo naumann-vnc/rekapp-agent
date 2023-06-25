@@ -52,7 +52,7 @@ namespace rekapp_tray
                 // Prepare the JSON data
                 string ipAddress = GetIPAddress();
                 string username = Environment.UserName;
-                string json = $"{{\"ipAddress\":\"{ipAddress}\",\"username\":\"{username}\"}}";
+                string json = $"{{\"ip\":\"{ipAddress}\",\"windows_user\":\"{username}\"}}";
 
                 // Create the HttpClient
                 using (HttpClient client = new HttpClient())
@@ -62,8 +62,8 @@ namespace rekapp_tray
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
                     // Send the POST request
-                    HttpResponseMessage response = await client.PostAsync("https://rekapp.net:8090", new StringContent(json, Encoding.UTF8, "application/json"));
-
+                    HttpResponseMessage response = await client.PostAsync("https://api.rekapp.net/api/v1/user/configure", new StringContent(json, Encoding.UTF8, "application/json"));
+                    
                     // Check if the request was successful
                     if (response.IsSuccessStatusCode)
                     {
@@ -71,7 +71,7 @@ namespace rekapp_tray
                     }
                     else
                     {
-                        MessageBox.Show("Request failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Request failed." + response + "\n" + json, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
